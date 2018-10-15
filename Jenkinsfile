@@ -16,8 +16,10 @@ pipeline {
 		}
 		stage('Push Registry') {
 			steps {
-				sh 'docker tag app:test monicasatan/app:stable'
-				sh 'docker push monicasatan/app:stable'
+				withCredentials([usernamePassword(credentialsId: 'db79aaf1-a215-4d5e-b590-638dc420f5f7', passwordVariable: 'GithubPass01', usernameVariable: 'monitasatan@gmail.com')]) {
+					sh 'docker tag app:test monicasatan/app:stable'
+					sh 'docker push monicasatan/app:stable'
+				}
 			}
 		}
 	}
